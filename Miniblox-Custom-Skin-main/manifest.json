@@ -1,0 +1,67 @@
+{
+  "manifest_version": 3,
+  "name": "Miniblox Custom Skin/Cape + Adblock PRO (CrazyGames)",
+  "version": "3.6.0",
+  "description": "Custom skins/capes + adblock + PRO monitor/logs for CrazyGames Miniblox.",
+  "action": { "default_popup": "popup.html" },
+  "icons": { "128": "icon128.png" },
+
+  "permissions": [
+    "storage",
+    "tabs",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "declarativeNetRequestFeedback"
+  ],
+
+  "host_permissions": [
+    "*://miniblox.io/*",
+    "*://*.miniblox.io/*",
+    "*://miniblox.org/*",
+    "*://*.miniblox.org/*",
+    "*://miniblox.com/*",
+    "*://*.miniblox.com/*",
+    "*://miniblox.online/*",
+    "*://*.miniblox.online/*",
+    "*://crazygames.com/*",
+    "*://*.crazygames.com/*",
+    "*://*/*"
+  ],
+
+  "declarative_net_request": {
+    "rule_resources": [
+      { "id": "adblock_rules", "enabled": true, "path": "rules.json" }
+    ]
+  },
+
+  "background": { "service_worker": "background.js" },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://miniblox.io/*",
+        "*://*.miniblox.io/*",
+        "*://miniblox.org/*",
+        "*://*.miniblox.org/*",
+        "*://miniblox.com/*",
+        "*://*.miniblox.com/*",
+        "*://miniblox.online/*",
+        "*://*.miniblox.online/*",
+        "*://crazygames.com/*",
+        "*://*.crazygames.com/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": ["console.js"]
+    },
+    {
+      "matches": [
+        "*://crazygames.com/*",
+        "*://*.crazygames.com/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": ["adhide.js", "monitor.js"]
+    }
+  ]
+}
